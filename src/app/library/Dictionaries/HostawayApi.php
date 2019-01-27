@@ -2,7 +2,7 @@
 
 namespace PhoneBook\Dictionaries;
 
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
 
 class HostawayApi implements CountryStorage, TimezoneStorage
 {
@@ -26,8 +26,8 @@ class HostawayApi implements CountryStorage, TimezoneStorage
     public function loadCountries(): array
     {
         try {
-            $response = $this->client->get(self::COUNTRIES_URI)->send();
-            $responseArray = json_decode($response->getBody(true), true);
+            $response = $this->client->get(self::COUNTRIES_URI);
+            $responseArray = json_decode($response->getBody()->getContents(), true);
             $countries = $responseArray['result'];
         } catch (\Exception $e) {
             $countries = [];
@@ -42,8 +42,8 @@ class HostawayApi implements CountryStorage, TimezoneStorage
     public function loadTimezones(): array
     {
         try {
-            $response = $this->client->get(self::TIMEZONES_URI)->send();
-            $responseArray = json_decode($response->getBody(true), true);
+            $response = $this->client->get(self::TIMEZONES_URI);
+            $responseArray = json_decode($response->getBody()->getContents(), true);
             $timezones = $responseArray['result'];
         } catch (\Exception $e) {
             $timezones = [];
