@@ -45,7 +45,7 @@ try {
 
     $phoneBook = new MicroCollection();
     $phoneBook->setHandler(new \PhoneBook\Controllers\PhoneBookController());
-    $phoneBook->setPrefix('/orders')
+    $phoneBook->setPrefix('/contacts')
         ->get('/{page:\d+}/{limit:\d+}', 'index')
         ->get('/{page:\d+}/{limit:\d+}/{search}', 'search')
         ->get('/{id:\d+}', 'show')
