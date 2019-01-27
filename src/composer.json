@@ -1,0 +1,15 @@
+{
+    "name": "santttal/phonebook",
+    "description": "rest api test case",
+    "require": {
+        "php": ">=7.0",
+        "guzzle/guzzle": "^3.9",
+        "nesbot/carbon": "^2.10"
+    },
+    "authors": [
+        {
+            "name": "Andrey Bogdanov",
+            "email": "bogdanov6391@gmail.com"
+        }
+    ]
+}
