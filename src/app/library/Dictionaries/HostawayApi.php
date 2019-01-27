@@ -17,7 +17,7 @@ class HostawayApi implements CountryStorage, TimezoneStorage
 
     public function __construct()
     {
-        $this->client = new Client(self::BASE_URL);
+        $this->client = new Client(['base_uri' => self::BASE_URL]);
     }
 
     /**
