@@ -7,10 +7,7 @@ If you wish to check older versions or newer ones currently under development, p
 
 ## Get Started
 
-### Requirements
-
 * docker-compose up --build
-* install dependencies via composer: *composer install*
 * Then you'll need to create the database and initialize schema:
 
 # Routes
