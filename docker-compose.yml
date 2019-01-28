@@ -18,6 +18,11 @@ services:
     networks:
       - code-network
 
+  redis:
+    image: redis:5
+    networks:
+      - code-network
+
   composer:
     image: composer:1.6
     volumes:
