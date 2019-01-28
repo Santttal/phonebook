@@ -38,3 +38,12 @@ $di->set('dictionary', function () {
     // there can be realized dictionary for tests and for dev
     return new HostawayApi();
 });
+
+
+$di->set('redis', function () {
+    $config = $this->getConfig();
+    $redis = new Redis();
+    $redis->connect($config->redis->host);
+
+    return $redis;
+});

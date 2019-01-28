@@ -12,6 +12,9 @@ return new Config([
         'password' => '123456',
         'dbname' => 'phonebook'
     ],
+    'redis' => [
+        'host' => 'redis',
+    ],
     'application' => [
         'controllersDir' => APP_PATH . '/controllers/',
         'modelsDir'      => APP_PATH . '/models/',
