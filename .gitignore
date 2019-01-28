@@ -2,3 +2,5 @@
 /config/development/
 /src/vendor
 .idea
+/src/.phalcon/*
+!/src/.phalcon/.gitkeep

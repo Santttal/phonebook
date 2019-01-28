@@ -1,7 +1,8 @@
 <?php
 
 use Phalcon\Config;
-use Phalcon\Logger;
+
+defined('APP_PATH') || define('APP_PATH', realpath('.'));
 
 return new Config([
     'database' => [
