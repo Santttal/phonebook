@@ -4,3 +4,5 @@
 .idea
 /src/.phalcon/*
 !/src/.phalcon/.gitkeep
+/databases/*
+!/databases/.gitkeep
