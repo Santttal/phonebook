@@ -14,9 +14,14 @@ class HostawayApi implements CountryStorage, TimezoneStorage
      * @var Client
      */
     private $client;
+    /**
+     * @var CacheStorage
+     */
+    private $cache;
 
-    public function __construct()
+    public function __construct(CacheStorage $cache)
     {
+        $this->cache = $cache;
         $this->client = new Client(['base_uri' => self::BASE_URL]);
     }
 
@@ -25,10 +30,15 @@ class HostawayApi implements CountryStorage, TimezoneStorage
      */
     public function loadCountries(): array
     {
+        if ($countries = $this->cache->loadCountries()) {
+            return $countries;
+        }
+
         try {
             $response = $this->client->get(self::COUNTRIES_URI);
             $responseArray = json_decode($response->getBody()->getContents(), true);
             $countries = $responseArray['result'];
+            $this->cache->saveCountries($countries);
         } catch (\Exception $e) {
             $countries = [];
         }
@@ -41,10 +51,15 @@ class HostawayApi implements CountryStorage, TimezoneStorage
      */
     public function loadTimezones(): array
     {
+        if ($timezones = $this->cache->loadTimezones()) {
+            return $timezones;
+        }
+
         try {
             $response = $this->client->get(self::TIMEZONES_URI);
             $responseArray = json_decode($response->getBody()->getContents(), true);
             $timezones = $responseArray['result'];
+            $this->cache->saveTimezones($timezones);
         } catch (\Exception $e) {
             $timezones = [];
         }

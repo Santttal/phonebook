@@ -1,6 +1,7 @@
 <?php
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
+use PhoneBook\Dictionaries\CacheStorage;
 use PhoneBook\Dictionaries\HostawayApi;
 
 /**
@@ -34,9 +35,9 @@ $di->set('db', function () {
     ]);
 });
 
-$di->set('dictionary', function () {
+$di->set('dictionary', function () use ($di) {
     // there can be realized dictionary for tests and for dev
-    return new HostawayApi();
+    return new HostawayApi(new CacheStorage($di->get('redis')));
 });
 
 
