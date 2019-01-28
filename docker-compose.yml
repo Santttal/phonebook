@@ -18,6 +18,13 @@ services:
     networks:
       - code-network
 
+  composer:
+    image: composer:1.6
+    volumes:
+      - ./src:/var/www
+    working_dir: /var/www
+    command: composer install
+
   db:
     image: mariadb
     restart: always
