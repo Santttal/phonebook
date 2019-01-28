@@ -24,6 +24,7 @@ services:
       - ./src:/var/www
     working_dir: /var/www
     command: composer install
+    user: 1000:1000
 
   db:
     image: mariadb
