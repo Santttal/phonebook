@@ -1,3 +1,5 @@
-FROM mileschou/phalcon:7.3-fpm
+FROM mileschou/phalcon:7.2-fpm
 
-RUN docker-php-ext-install pdo_mysql
+WORKDIR /var/www
+
+RUN docker-php-ext-install pdo_mysql && docker-phalcon-install-devtools
