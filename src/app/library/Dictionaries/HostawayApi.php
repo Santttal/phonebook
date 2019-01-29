@@ -3,6 +3,7 @@
 namespace PhoneBook\Dictionaries;
 
 use GuzzleHttp\Client;
+use Phalcon\Logger\AdapterInterface;
 
 class HostawayApi implements CountryStorage, TimezoneStorage
 {
@@ -18,10 +19,15 @@ class HostawayApi implements CountryStorage, TimezoneStorage
      * @var CacheStorage
      */
     private $cache;
+    /**
+     * @var AdapterInterface
+     */
+    private $logger;
 
-    public function __construct(CacheStorage $cache)
+    public function __construct(CacheStorage $cache, AdapterInterface $logger)
     {
         $this->cache = $cache;
+        $this->logger = $logger;
         $this->client = new Client(['base_uri' => self::BASE_URL]);
     }
 
@@ -40,6 +46,7 @@ class HostawayApi implements CountryStorage, TimezoneStorage
             $countries = $responseArray['result'];
             $this->cache->saveCountries($countries);
         } catch (\Exception $e) {
+            $this->logger->error("Can't load countries");
             $countries = [];
         }
 
@@ -61,6 +68,7 @@ class HostawayApi implements CountryStorage, TimezoneStorage
             $timezones = $responseArray['result'];
             $this->cache->saveTimezones($timezones);
         } catch (\Exception $e) {
+            $this->logger->error("Can't load timezones");
             $timezones = [];
         }
 

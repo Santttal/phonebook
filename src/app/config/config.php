@@ -15,6 +15,9 @@ return new Config([
     'redis' => [
         'host' => 'redis',
     ],
+    'logger' => [
+        'path' => '/var/log/phonebook/error_requests.log',
+    ],
     'application' => [
         'controllersDir' => APP_PATH . '/controllers/',
         'modelsDir'      => APP_PATH . '/models/',

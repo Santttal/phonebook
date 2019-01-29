@@ -62,6 +62,6 @@ try {
 
     $application->handle();
 } catch (Exception $e) {
-	echo $e->getMessage(), '<br>';
-	echo nl2br(htmlentities($e->getTraceAsString()));
+    $di['logger']->error($e->getMessage() . ':' . $e->getTraceAsString());
+    echo json_encode(['error' => true]);
 }

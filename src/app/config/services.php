@@ -37,9 +37,8 @@ $di->set('db', function () {
 
 $di->set('dictionary', function () use ($di) {
     // there can be realized dictionary for tests and for dev
-    return new HostawayApi(new CacheStorage($di->get('redis')));
+    return new HostawayApi(new CacheStorage($di->get('redis')), $this->get('logger'));
 });
-
 
 $di->set('redis', function () {
     $config = $this->getConfig();
@@ -47,4 +46,14 @@ $di->set('redis', function () {
     $redis->connect($config->redis->host);
 
     return $redis;
+});
+
+$di->set('logger', function () {
+    $config = $this->getConfig();
+    $options = [
+        'name'    => $config->logger->path,
+        'adapter' => 'file',
+    ];
+
+    return Phalcon\Logger\Factory::load($options);
 });
